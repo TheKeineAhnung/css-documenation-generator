@@ -1,1 +1,1 @@
-# css-docs-generator
+# css-documenation-generator
