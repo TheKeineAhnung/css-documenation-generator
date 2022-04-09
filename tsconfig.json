@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "baseUrl": "src",
+    "declaration": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "lib": ["esnext"],
+    "module": "commonjs",
+    "noImplicitOverride": true,
+    "outDir": "./build",
+    "resolveJsonModule": true,
+    "strict": true,
+    "target": "es2019"
+  },
+  "include": ["./**/*.ts"],
+  "exclude": ["./node_modules", "./build"],
+  "rules": {
+    "orderedImports": [true]
+  }
+}
