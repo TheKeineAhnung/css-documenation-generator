@@ -6,7 +6,7 @@ import { isValidGeneratorInput } from './isValidGeneratorInput';
 import { isValidGeneratorOutput } from './isValidGeneratorOutput';
 import { writeFile } from './writeFile';
 
-function generateDocs(input: string[], output: string): statusObject {
+function generateCssDocs(input: string[], output: string): statusObject {
   let returnObject: statusObject = {
     status: "success",
   };
@@ -64,11 +64,4 @@ function generateDocs(input: string[], output: string): statusObject {
   return returnObject;
 }
 
-console.log(
-  generateDocs(
-    ["E:/css-documentation-generator/test_files"],
-    "E:/css-documentation-generator/test_files"
-  )
-);
-
-export { generateDocs };
+export { generateCssDocs };
