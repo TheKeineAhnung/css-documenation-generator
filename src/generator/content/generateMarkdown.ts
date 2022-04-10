@@ -23,6 +23,7 @@ function generateMarkdown(cssContent: string): string {
     selectorPart += "}";
     selectorParts[index] = selectorPart;
   });
+  selectorParts.sort();
   for (let i: number = 0; i < selectorParts.length; i++) {
     if (selectorParts[i].trimStart().startsWith(".")) {
       markdown += generateClassSelectorContent(selectorParts[i].trim());
