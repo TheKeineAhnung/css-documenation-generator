@@ -63,4 +63,9 @@ function generateCssDocs(input: string[], output: string): statusObject {
   return returnObject;
 }
 
+generateCssDocs(
+  ["E:/css-documentation-generator/test_files"],
+  "E:/css-documentation-generator/test_files"
+);
+
 export { generateCssDocs };

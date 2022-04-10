@@ -1,8 +1,13 @@
+import { removeComments } from '../../css/removeComments';
 import { generateClassSelectorContent } from './generateClassSelectorContent';
 import { generateElementSelectorContent } from './generateElementSelectorContent';
 import { generateIdSelectorContent } from './generateIdSelectorContent';
 
 function generateMarkdown(cssContent: string): string {
+  if (cssContent.includes("/*")) {
+    cssContent = removeComments(cssContent);
+  }
+
   let selectorParts: string[] = cssContent.split("}");
   let markdown: string = "";
 
