@@ -1,6 +1,6 @@
 import { getAllCssFilesInFolder } from '../css/getAllCssFilesInFolder';
 import { getCSSContent } from '../css/getCssContent';
-import { statusObject } from '../messages/statusObject';
+import { statusObject } from '../types/statusObject';
 import { generateMarkdown } from './content/generateMarkdown';
 import { isValidGeneratorInput } from './isValidGeneratorInput';
 import { isValidGeneratorOutput } from './isValidGeneratorOutput';

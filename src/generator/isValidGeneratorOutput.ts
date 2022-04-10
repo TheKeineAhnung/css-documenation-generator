@@ -1,6 +1,6 @@
 import { existsSync } from 'fs';
 
-import { statusObject } from '../messages/statusObject';
+import { statusObject } from '../types/statusObject';
 
 function isValidGeneratorOutput(output: string): statusObject {
   let returnObject: statusObject = {

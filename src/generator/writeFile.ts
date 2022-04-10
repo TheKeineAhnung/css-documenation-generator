@@ -1,5 +1,5 @@
 import { writeFileSync } from 'fs';
-import { statusObject } from 'messages/statusObject';
+import { statusObject } from 'types/statusObject';
 
 function writeFile(filePath: string, content: string): statusObject {
   let returnObject: statusObject = {
