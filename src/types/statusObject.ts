@@ -1,3 +1,5 @@
-type statusObject = {status: string, message?: string};
+import { status } from './status';
+
+type statusObject = { status: status; message?: string };
 
 export { statusObject };
