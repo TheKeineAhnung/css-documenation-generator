@@ -52,7 +52,6 @@ function generateCssDocs(input: string[], output: string): statusObject {
     markdown = generateMarkdown(fileContent);
     let outputFile: string =
       output + "/" + inputFilesWithoutPath[index].replace(".css", ".md");
-    console.log(outputFile);
     let write = writeFile(outputFile, markdown);
     if (write.status !== "success") {
       returnObject.status = "error";
