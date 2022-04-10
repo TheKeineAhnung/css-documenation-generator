@@ -3,12 +3,12 @@ import { isPseudoElement } from './isPseudoElement';
 import { generateMarkdownContent } from './templates/generateMarkdownContent';
 import { generateMarkdownHeading } from './templates/generateMarkdownHeading';
 
-function generateClassSelectorContent(content: string): string {
+function generateUniversalSelectorContent(content: string): string {
   let markdown: string = "";
   if (content.split("{")[0].includes(":")) {
     let pseudoElements: string[] = getPseudoSelectors(content);
 
-    let pseudoElementsGeneralName: string = "Class";
+    let pseudoElementsGeneralName: string = "Universal selector";
 
     pseudoElements.forEach((pseudoElement) => {
       if (isPseudoElement(pseudoElement)) {
@@ -28,11 +28,11 @@ function generateClassSelectorContent(content: string): string {
       content.split("{")[1].trim().split("}")[0].trim()
     );
   } else {
-    markdown += generateMarkdownHeading("Class", content.split("{")[0]);
+    markdown += generateMarkdownHeading("Universal selector", "*");
     markdown += "\n";
     markdown += generateMarkdownContent(
-      "Class",
-      content.split("{")[0],
+      "Universal selector",
+      "*",
       content.split("{")[1].trim().split("}")[0].trim()
     );
   }
@@ -41,4 +41,4 @@ function generateClassSelectorContent(content: string): string {
   return markdown;
 }
 
-export { generateClassSelectorContent };
+export { generateUniversalSelectorContent };

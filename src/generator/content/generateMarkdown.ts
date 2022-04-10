@@ -2,6 +2,7 @@ import { removeComments } from '../../css/removeComments';
 import { generateClassSelectorContent } from './generateClassSelectorContent';
 import { generateElementSelectorContent } from './generateElementSelectorContent';
 import { generateIdSelectorContent } from './generateIdSelectorContent';
+import { generateUniversalSelectorContent } from './generateUniversalSelector';
 
 function generateMarkdown(cssContent: string): string {
   if (cssContent.includes("/*")) {
@@ -34,6 +35,8 @@ function generateMarkdown(cssContent: string): string {
       markdown += generateClassSelectorContent(selectorParts[i].trim());
     } else if (selectorParts[i].trimStart().startsWith("#")) {
       markdown += generateIdSelectorContent(selectorParts[i].trim());
+    } else if (selectorParts[i].trimStart().startsWith("*")) {
+      markdown += generateUniversalSelectorContent(selectorParts[i].trim());
     } else {
       markdown += generateElementSelectorContent(selectorParts[i].trim());
     }

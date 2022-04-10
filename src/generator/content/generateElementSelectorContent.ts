@@ -1,3 +1,4 @@
+import { getPseudoSelectors } from './getPseudoSelectors';
 import { isPseudoElement } from './isPseudoElement';
 import { generateMarkdownContent } from './templates/generateMarkdownContent';
 import { generateMarkdownHeading } from './templates/generateMarkdownHeading';
@@ -5,25 +6,7 @@ import { generateMarkdownHeading } from './templates/generateMarkdownHeading';
 function generateElementSelectorContent(content: string): string {
   let markdown: string = "";
   if (content.split("{")[0].includes(":")) {
-    let pseudoElements: string[] = [];
-
-    if (content.split("{")[0].split(":").indexOf("") > 0) {
-      for (
-        let i: number = 2;
-        i < content.split("{")[0].split(":").length;
-        i++
-      ) {
-        pseudoElements.push(content.split("{")[0].split(":")[i].trim());
-      }
-    } else {
-      for (
-        let i: number = 1;
-        i < content.split("{")[0].split(":").length;
-        i++
-      ) {
-        pseudoElements.push(content.split("{")[0].split(":")[i].trim());
-      }
-    }
+    let pseudoElements: string[] = getPseudoSelectors(content);
 
     let pseudoElementsGeneralName: string = "Element";
 
