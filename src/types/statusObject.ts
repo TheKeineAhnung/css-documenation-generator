@@ -1,5 +1,8 @@
-import { status } from './status';
+import { Status } from './Status';
 
-type statusObject = { status: status; message?: string };
+interface StatusObject {
+  status: Status;
+  message?: string;
+}
 
-export { statusObject };
+export { StatusObject };

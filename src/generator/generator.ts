@@ -1,18 +1,18 @@
 import { getAllCssFilesInFolder } from '../css/getAllCssFilesInFolder';
 import { getCSSContent } from '../css/getCssContent';
-import { statusObject } from '../types/statusObject';
+import { StatusObject } from '../types/StatusObject';
 import { generateMarkdown } from './content/generateMarkdown';
 import { isValidGeneratorInput } from './isValidGeneratorInput';
 import { isValidGeneratorOutput } from './isValidGeneratorOutput';
 import { writeFile } from './writeFile';
 
-function generateCssDocs(input: string[], output: string): statusObject {
-  let returnObject: statusObject = {
+function generateCssDocs(input: string[], output: string): StatusObject {
+  let returnObject: StatusObject = {
     status: "success",
   };
 
-  let validInput: statusObject = isValidGeneratorInput(input);
-  let validOutput: statusObject = isValidGeneratorOutput(output);
+  let validInput: StatusObject = isValidGeneratorInput(input);
+  let validOutput: StatusObject = isValidGeneratorOutput(output);
 
   if (validInput.status !== "success") {
     return validInput;

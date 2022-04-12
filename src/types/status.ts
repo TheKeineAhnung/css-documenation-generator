@@ -1,3 +1,3 @@
-type status = "success" | "error" | "warning" | "info";
+type Status = "success" | "error" | "warning" | "info";
 
-export { status };
+export { Status };

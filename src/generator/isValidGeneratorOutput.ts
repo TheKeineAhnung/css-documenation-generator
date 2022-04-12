@@ -1,9 +1,9 @@
 import { existsSync } from 'fs';
 
-import { statusObject } from '../types/statusObject';
+import { StatusObject } from '../types/StatusObject';
 
-function isValidGeneratorOutput(output: string): statusObject {
-  let returnObject: statusObject = {
+function isValidGeneratorOutput(output: string): StatusObject {
+  let returnObject: StatusObject = {
     status: "success",
   };
 
