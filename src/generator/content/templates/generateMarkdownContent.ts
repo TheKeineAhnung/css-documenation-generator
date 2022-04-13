@@ -5,7 +5,10 @@ function generateMarkdownContent(
 ): string {
   let tokens: string[] = content.split(";");
   tokens.forEach((token, index) => {
-    if (token === "" || token === " ") {
+    tokens[index] = token.trim();
+  });
+  tokens.forEach((token, index) => {
+    if (token === "" || token === " " || token === "\r\n" || token === "\n") {
       tokens.splice(index, 1);
     }
   });
