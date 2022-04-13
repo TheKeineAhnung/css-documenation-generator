@@ -1,5 +1,5 @@
 function generateMarkdownHeading(type: string, selector: string): string {
-  return `## ${type}: ${selector} \n`;
+  return `## \`${type.trim()}\`: \`${selector.trim()}\`: \n`;
 }
 
 export { generateMarkdownHeading };

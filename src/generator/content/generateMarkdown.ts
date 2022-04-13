@@ -1,8 +1,8 @@
+import { getSelectorType } from '../../css/getSelectorType';
 import { removeComments } from '../../css/removeComments';
-import { generateClassSelectorContent } from './generateClassSelectorContent';
-import { generateElementSelectorContent } from './generateElementSelectorContent';
-import { generateIdSelectorContent } from './generateIdSelectorContent';
-import { generateUniversalSelectorContent } from './generateUniversalSelector';
+import { splitSelectors } from '../../css/splitSelectors';
+import { generateMarkdownContent } from './templates/generateMarkdownContent';
+import { generateMarkdownHeading } from './templates/generateMarkdownHeading';
 
 function generateMarkdown(cssContent: string): string {
   if (cssContent.includes("/*")) {
@@ -30,17 +30,31 @@ function generateMarkdown(cssContent: string): string {
     selectorParts[index] = selectorPart;
   });
   selectorParts.sort();
-  for (let i: number = 0; i < selectorParts.length; i++) {
-    if (selectorParts[i].trimStart().startsWith(".")) {
-      markdown += generateClassSelectorContent(selectorParts[i].trim());
-    } else if (selectorParts[i].trimStart().startsWith("#")) {
-      markdown += generateIdSelectorContent(selectorParts[i].trim());
-    } else if (selectorParts[i].trimStart().startsWith("*")) {
-      markdown += generateUniversalSelectorContent(selectorParts[i].trim());
-    } else {
-      markdown += generateElementSelectorContent(selectorParts[i].trim());
+  let selectorType: string = "";
+  selectorParts.forEach((selectorPart, index) => {
+    let selectors: string[] = splitSelectors(selectorPart);
+    for (let i: number = 0; i < selectors.length; i++) {
+      let currentSelector: string = selectors[i];
+      let delimiter: RegExp = /(?=:)/g;
+      let tokens: string[] = currentSelector.split(delimiter);
+      tokens.forEach((token, index) => {
+        if (token === ":") {
+          tokens.splice(index, 1);
+        }
+      });
+      for (let j: number = 0; j < tokens.length; j++) {
+        if (tokens[j].startsWith("::")) {
+          tokens[j] = tokens[j].replace("::", ":");
+        }
+        selectorType += getSelectorType(tokens[j]);
+      }
     }
-  }
+  });
+  let cssStyles: string = cssContent.split("{")[1].replace("}", "");
+  markdown +=
+    generateMarkdownHeading(selectorType, cssContent.split("{")[0]) +
+    generateMarkdownContent(selectorType, cssContent.split("{")[0], cssStyles);
+
   return markdown;
 }
 
