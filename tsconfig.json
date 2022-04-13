@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "allowJs": false,
-    "baseUrl": "src",
+    "baseUrl": "lib",
     "declaration": true,
     "esModuleInterop": true,
     "importHelpers": true,
