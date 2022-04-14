@@ -4,6 +4,9 @@ import { splitSelectors } from '../../css/splitSelectors';
 import { generateMarkdownContent } from './templates/generateMarkdownContent';
 import { generateMarkdownHeading } from './templates/generateMarkdownHeading';
 
+// TODO @TheKeineAhnung: add support for attribute selectors
+// TODO @TheKeineAhnung: add support for >, + and ~ selector
+
 function generateMarkdown(cssContent: string): string {
   if (cssContent.includes("/*")) {
     cssContent = removeComments(cssContent);
@@ -49,11 +52,15 @@ function generateMarkdown(cssContent: string): string {
         selectorType += getSelectorType(tokens[j]);
       }
     }
+    let cssStyles: string = cssContent.split("{")[1].replace("}", "");
+    markdown +=
+      generateMarkdownHeading(selectorType, cssContent.split("{")[0]) +
+      generateMarkdownContent(
+        selectorType,
+        cssContent.split("{")[0],
+        cssStyles
+      );
   });
-  let cssStyles: string = cssContent.split("{")[1].replace("}", "");
-  markdown +=
-    generateMarkdownHeading(selectorType, cssContent.split("{")[0]) +
-    generateMarkdownContent(selectorType, cssContent.split("{")[0], cssStyles);
 
   return markdown;
 }

@@ -16,7 +16,7 @@ function generateMarkdownContent(
   tokens.forEach((token) => {
     contentString += `- \`${token.trim()}\`\n`;
   });
-  return `The \`${type.toLowerCase()}\` selector with the specified selectors \`${selector.trim()}\` has the following properties: \n\n${contentString}`;
+  return `The \`${type.toLowerCase()}\` selector with the specified selectors \`${selector.trim()}\` has the following properties: \n\n${contentString}\n`;
 }
 
 export { generateMarkdownContent };
