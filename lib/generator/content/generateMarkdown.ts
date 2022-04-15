@@ -5,7 +5,6 @@ import { generateMarkdownContent } from './templates/generateMarkdownContent';
 import { generateMarkdownHeading } from './templates/generateMarkdownHeading';
 
 // TODO @TheKeineAhnung: add support for attribute selectors
-// TODO @TheKeineAhnung: add support for >, + and ~ selector
 
 function generateMarkdown(cssContent: string): string {
   if (cssContent.includes("/*")) {
@@ -34,7 +33,7 @@ function generateMarkdown(cssContent: string): string {
   });
   selectorParts.sort();
   let selectorType: string = "";
-  selectorParts.forEach((selectorPart, index) => {
+  selectorParts.forEach((selectorPart) => {
     let selectors: string[] = splitSelectors(selectorPart);
     for (let i: number = 0; i < selectors.length; i++) {
       let currentSelector: string = selectors[i];
