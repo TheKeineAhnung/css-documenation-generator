@@ -2,33 +2,39 @@
   "name": "css-documenation-generator",
   "version": "0.0.0",
   "description": "A library to generate docs for css file classes in markdown files",
+  "contributors": [
+    {
+      "name": "TheKeineAhnung",
+      "email": "kontakt@keineahnung.eu"
+    }
+  ],
+  "author": "TheKeineAhnung",
+  "license": "CC-BY-NC-SA-4.0",
   "main": "build/cssDocumentationGenerator.js",
   "types": "build/cssDocumentationGenerator.d.ts",
-  "private": false,
-  "scripts": {
-    "build": "npx tsc",
-    "dev": "npx tsc -w"
+  "dependencies": {
+    "@types/node": "17.0.24"
   },
+  "devDependencies": {
+    "typescript": "4.6.3"
+  },
+  "private": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TheKeineAhnung/css-documenation-generator"
   },
-  "author": "KeineAhnung",
-  "license": "CC-BY-NC-SA-4.0",
+  "scripts": {
+    "build": "npx tsc",
+    "dev": "npx tsc -w"
+  },
   "bugs": {
     "url": "https://github.com/TheKeineAhnung/css-documenation-generator/issues"
   },
   "homepage": "https://github.com/TheKeineAhnung/css-documenation-generator#readme",
-  "devDependencies": {
-    "typescript": "^4.6.3"
-  },
   "keywords": [
     "css",
     "markdown",
     "documentation",
     "generator"
-  ],
-  "dependencies": {
-    "@types/node": "^17.0.23"
-  }
+  ]
 }
