@@ -9,7 +9,7 @@ function splitSelectors(selectors: string): string[] {
   if (selectorsClass[0] === "") {
     selectorsClass.splice(0, 1);
   }
-  selectorsClass.forEach((element, index) => {
+  selectorsClass.forEach((element: string, index: number) => {
     if (index - 1 >= 0) {
       if (selectorsClass[index - 1].endsWith(" ")) {
         element = ` .${element}`;
@@ -23,8 +23,8 @@ function splitSelectors(selectors: string): string[] {
     }
     selectorsClass[index] = element;
   });
-  selectorsClass.forEach((selector) => {
-    selector.split("#").forEach((element, index) => {
+  selectorsClass.forEach((selector: string) => {
+    selector.split("#").forEach((element: string, index: number) => {
       if (index - 1 >= 0) {
         if (selector.split("#")[index - 1].endsWith(" ")) {
           if (!element.startsWith(".") && !element.startsWith(" .")) {
@@ -49,23 +49,23 @@ function splitSelectors(selectors: string): string[] {
     });
   });
   let skipNext: boolean = false;
-  selectorsClassId.forEach((selector) => {
+  selectorsClassId.forEach((selector: string) => {
     if (selector.startsWith(" #") || selector.startsWith(" .")) {
       let delimiter: RegExp = /(?=\s)/g;
       let tokens: string[] = selector.split(delimiter);
-      tokens.forEach((token, index) => {
+      tokens.forEach((token: string, index: number) => {
         if (token === "" || token === " ") {
           tokens.splice(index, 1);
         }
       });
-      tokens.forEach((token) => {
+      tokens.forEach((token: string) => {
         selectorsAll.push(token.trimEnd());
       });
     } else {
       selectorsAll.push(selector.trimEnd());
     }
   });
-  selectorsAll.forEach((selector, index) => {
+  selectorsAll.forEach((selector: string, index: number) => {
     if (selector === "") {
       selectorsAll.splice(index, 1);
     }
@@ -85,7 +85,7 @@ function splitSelectors(selectors: string): string[] {
       mergedSelectors.push(selectorsAll[i]);
     }
   }
-  mergedSelectors.forEach((selector, index) => {
+  mergedSelectors.forEach((selector: string, index: number) => {
     if (
       selector.includes(">") ||
       selector.includes("+") ||
@@ -107,12 +107,12 @@ function splitSelectors(selectors: string): string[] {
   for (let i: number = 0; i < mergedSelectors.length; i++) {
     let element: string = mergedSelectors[i];
     let splitedElement: string[] = element.split(" ");
-    splitedElement.forEach((element, index) => {
+    splitedElement.forEach((element: string, index: number) => {
       if (index !== 0) {
         splitedElement[index] = ` ${element}`;
       }
     });
-    splitedElement.forEach((element, index) => {
+    splitedElement.forEach((element: string, index: number) => {
       if (element === "" || element === " ") {
         splitedElement.splice(index, 1);
       }
@@ -137,10 +137,10 @@ function splitSelectors(selectors: string): string[] {
         skipNext = false;
       }
     }
-    removeIndexes.forEach((removeIndex) => {
+    removeIndexes.forEach((removeIndex: number) => {
       delete elementArray[removeIndex];
     });
-    elementArray.forEach((element) => {
+    elementArray.forEach((element: string) => {
       finalMergedSelectors.push(element);
     });
   }

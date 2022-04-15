@@ -48,7 +48,7 @@ function generateCssDocs(input: string[], output: string): StatusObject {
 
   let markdown: string = "";
 
-  fileContents.forEach((fileContent, index) => {
+  fileContents.forEach((fileContent: string, index: number) => {
     markdown = generateMarkdown(fileContent);
     let outputFile: string =
       output + "/" + inputFilesWithoutPath[index].replace(".css", ".md");

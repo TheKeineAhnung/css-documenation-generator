@@ -7,7 +7,7 @@ function getAllCssFilesInFolder(
   let files: string[] = readdirSync(input);
   files = files.filter((file) => file.endsWith(".css"));
   if (fullPath) {
-    files.forEach((file) => {
+    files.forEach((file: string) => {
       files[files.indexOf(file)] = `${input}/${file}`;
     });
   }

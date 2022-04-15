@@ -18,7 +18,7 @@ function generateMarkdown(cssContent: string): string {
     return "We can't generate documentation for this file because it is empty.";
   }
 
-  selectorParts.forEach((selectorPart, index) => {
+  selectorParts.forEach((selectorPart: string, index: number) => {
     if (
       selectorPart === "" ||
       selectorPart === "\r\n" ||
@@ -27,19 +27,19 @@ function generateMarkdown(cssContent: string): string {
       selectorParts.splice(index, 1);
     }
   });
-  selectorParts.forEach((selectorPart, index) => {
+  selectorParts.forEach((selectorPart: string, index: number) => {
     selectorPart += "}";
     selectorParts[index] = selectorPart;
   });
   selectorParts.sort();
   let selectorType: string = "";
-  selectorParts.forEach((selectorPart) => {
+  selectorParts.forEach((selectorPart: string) => {
     let selectors: string[] = splitSelectors(selectorPart);
     for (let i: number = 0; i < selectors.length; i++) {
       let currentSelector: string = selectors[i];
       let delimiter: RegExp = /(?=:)/g;
       let tokens: string[] = currentSelector.split(delimiter);
-      tokens.forEach((token, index) => {
+      tokens.forEach((token: string, index: number) => {
         if (token === ":") {
           tokens.splice(index, 1);
         }
