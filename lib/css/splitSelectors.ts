@@ -146,7 +146,6 @@ function splitSelectors(selectors: string): string[] {
   }
 
   selectorsAll = finalMergedSelectors;
-  console.log(selectorsAll);
   return selectorsAll;
 }
 
