@@ -21,15 +21,19 @@ function getSelectorType(selector: string): string {
       return ":pseudo-class";
     }
   } else if (selector.startsWith("#")) {
-    return "Id";
+    return "#Id";
   } else if (selector.startsWith(" #")) {
-    return " Id";
+    return " #Id";
   } else if (selector.startsWith(".")) {
-    return "Class";
+    return ".Class";
   } else if (selector.startsWith(" .")) {
-    return " Class";
+    return " .Class";
   } else if (selector === "*") {
-    return "Universal";
+    return "*Universal";
+  } else if (selector.startsWith("[")) {
+    return "[Attribute]";
+  } else if (selector.startsWith(" [")) {
+    return " [Attribute]";
   } else {
     if (selector.startsWith(" ")) {
       return " Element";

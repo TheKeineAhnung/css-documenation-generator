@@ -4,7 +4,6 @@ import { splitSelectors } from '../../css/splitSelectors';
 import { generateMarkdownContent } from './templates/generateMarkdownContent';
 import { generateMarkdownHeading } from './templates/generateMarkdownHeading';
 
-// TODO @TheKeineAhnung: add support for attribute selectors
 // TODO @TheKeineAhnung: add support for keyframes
 
 function generateMarkdown(cssContent: string): string {

@@ -144,8 +144,26 @@ function splitSelectors(selectors: string): string[] {
       finalMergedSelectors.push(element);
     });
   }
-
   selectorsAll = finalMergedSelectors;
+  let merging: string[] = [];
+  selectorsAll.forEach((selector: string) => {
+    if (selector.includes("[")) {
+      let selectorAttribute: string[] = selector.split("[");
+      for (let i: number = 0; i < selectorAttribute.length; i++) {
+        if (selectorAttribute[i].endsWith("]")) {
+          selectorAttribute[i] = "[" + selectorAttribute[i];
+        } else {
+          selectorAttribute[i] = selectorAttribute[i];
+        }
+      }
+      selectorAttribute.forEach((element: string) => {
+        merging.push(element);
+      });
+    } else {
+      merging.push(selector);
+    }
+  });
+  selectorsAll = merging;
   return selectorsAll;
 }
 
