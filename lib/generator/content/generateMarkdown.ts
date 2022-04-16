@@ -1,6 +1,7 @@
 import { getSelectorType } from '../../css/getSelectorType';
 import { removeComments } from '../../css/removeComments';
 import { splitSelectors } from '../../css/splitSelectors';
+import { optimizeSelectorArray } from './optimizeSelectorArray';
 import { generateMarkdownContent } from './templates/generateMarkdownContent';
 import { generateMarkdownHeading } from './templates/generateMarkdownHeading';
 
@@ -16,19 +17,8 @@ function generateMarkdown(cssContent: string): string {
     return "We can't generate documentation for this file because it is empty.";
   }
 
-  selectorParts.forEach((selectorPart: string, index: number) => {
-    if (
-      selectorPart === "" ||
-      selectorPart === "\r\n" ||
-      selectorPart === "\n"
-    ) {
-      selectorParts.splice(index, 1);
-    }
-  });
-  selectorParts.forEach((selectorPart: string, index: number) => {
-    selectorPart += "}";
-    selectorParts[index] = selectorPart;
-  });
+  selectorParts = optimizeSelectorArray(selectorParts);
+
   let keyframeMerger: string[] = [];
   let skipNextCount: number = 0;
   for (let i: number = 0; i < selectorParts.length; i++) {
