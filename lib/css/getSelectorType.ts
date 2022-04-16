@@ -1,18 +1,9 @@
-import { getSelectorComparer } from './getSelectorComparer';
+import { detectSelectorTypeComparer } from './detectSelectorTypeComparer';
 import { isPseudoElement } from './isPseudoElement';
 
 function getSelectorType(selector: string): string {
-  let selectorComparer: string[] = getSelectorComparer();
-  for (let i: number = 0; i < selectorComparer.length; i++) {
-    if (selector.includes(selectorComparer[i])) {
-      let selectorParts: string[] = selector.split(selectorComparer[i]);
-      let partNames: string =
-        getSelectorType(selectorParts[0]).trimEnd() +
-        " " +
-        selectorComparer[i] +
-        getSelectorType(selectorParts[1]);
-      return partNames;
-    }
+  if (detectSelectorTypeComparer(selector) !== "false") {
+    return detectSelectorTypeComparer(selector);
   }
   if (selector.startsWith(":")) {
     if (isPseudoElement(selector)) {
