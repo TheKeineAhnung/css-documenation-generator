@@ -4,8 +4,6 @@ import { splitSelectors } from '../../css/splitSelectors';
 import { generateMarkdownContent } from './templates/generateMarkdownContent';
 import { generateMarkdownHeading } from './templates/generateMarkdownHeading';
 
-// TODO @TheKeineAhnung: add support for keyframes
-
 function generateMarkdown(cssContent: string): string {
   if (cssContent.includes("/*")) {
     cssContent = removeComments(cssContent);
@@ -31,10 +29,51 @@ function generateMarkdown(cssContent: string): string {
     selectorPart += "}";
     selectorParts[index] = selectorPart;
   });
+  let keyframeMerger: string[] = [];
+  let skipNextCount: number = 0;
+  for (let i: number = 0; i < selectorParts.length; i++) {
+    let element: string = selectorParts[i];
+    let count: number = i;
+    if (element.trim().startsWith("@keyframes")) {
+      while (
+        !selectorParts[count].trim().startsWith("100%") &&
+        !selectorParts[count].trim().startsWith("to")
+      ) {
+        count++;
+        skipNextCount++;
+      }
+      let keyframe: string = "";
+      let j = i;
+      while (j !== count) {
+        keyframe += selectorParts[j]
+          .trim()
+          .replace("\r\n", "")
+          .replace("\n", "");
+        j++;
+      }
+      keyframe += "}";
+      keyframeMerger.push(keyframe);
+    } else {
+      if (skipNextCount > 0) {
+        skipNextCount--;
+      } else {
+        keyframeMerger.push(element);
+      }
+    }
+  }
+  keyframeMerger.forEach((keyframe: string, index: number) => {
+    if (keyframe.trim() === "" || keyframe.trim() === "}") {
+      keyframeMerger.splice(index, 1);
+    }
+  });
+  selectorParts = keyframeMerger;
   selectorParts.sort();
-  let selectorType: string = "";
+
   selectorParts.forEach((selectorPart: string) => {
+    let selectorType: string = "";
+    let selectorPartBackup: string = selectorPart;
     let selectors: string[] = splitSelectors(selectorPart);
+    let skipNext: boolean = false;
     for (let i: number = 0; i < selectors.length; i++) {
       let currentSelector: string = selectors[i];
       let delimiter: RegExp = /(?=:)/g;
@@ -42,23 +81,60 @@ function generateMarkdown(cssContent: string): string {
       tokens.forEach((token: string, index: number) => {
         if (token === ":") {
           tokens.splice(index, 1);
+        } else if (token === "") {
+          tokens.splice(index, 1);
         }
       });
       for (let j: number = 0; j < tokens.length; j++) {
         if (tokens[j].startsWith("::")) {
           tokens[j] = tokens[j].replace("::", ":");
         }
-        selectorType += getSelectorType(tokens[j]);
+      }
+      for (let i: number = 0; i < tokens.length; i++) {
+        let token = tokens[i];
+        if (getSelectorType(token).toLowerCase().trim() === "animation") {
+          selectorType += getSelectorType(token) + selectors[i + 1].trim();
+          skipNext = true;
+        } else {
+          if (skipNext) {
+            skipNext = false;
+          } else {
+            selectorType += getSelectorType(token);
+          }
+        }
       }
     }
-    let cssStyles: string = cssContent.split("{")[1].replace("}", "");
-    markdown +=
-      generateMarkdownHeading(selectorType, cssContent.split("{")[0]) +
-      generateMarkdownContent(
-        selectorType,
-        cssContent.split("{")[0],
-        cssStyles
-      );
+
+    if (selectorPartBackup.split("{")[0].trim().startsWith("@keyframes")) {
+      let cssStyles: string[] = selectorPartBackup.split("{");
+      let content: string = "";
+      for (let i = 1; i < cssStyles.length; i++) {
+        content += cssStyles[i];
+      }
+      content = content.replace(/(})/g, "");
+      markdown +=
+        generateMarkdownHeading(
+          selectorType,
+          selectorPartBackup.split("{")[0]
+        ) +
+        generateMarkdownContent(
+          selectorType,
+          selectorPartBackup.split("{")[0],
+          content
+        );
+    } else {
+      let cssStyles: string = selectorPartBackup.split("{")[1].replace("}", "");
+      markdown +=
+        generateMarkdownHeading(
+          selectorType,
+          selectorPartBackup.split("{")[0]
+        ) +
+        generateMarkdownContent(
+          selectorType,
+          selectorPartBackup.split("{")[0],
+          cssStyles
+        );
+    }
   });
 
   return markdown;

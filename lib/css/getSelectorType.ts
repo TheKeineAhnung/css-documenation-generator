@@ -34,6 +34,8 @@ function getSelectorType(selector: string): string {
     return "[Attribute]";
   } else if (selector.startsWith(" [")) {
     return " [Attribute]";
+  } else if (selector.startsWith("@")) {
+    return "Animation ";
   } else {
     if (selector.startsWith(" ")) {
       return " Element";
