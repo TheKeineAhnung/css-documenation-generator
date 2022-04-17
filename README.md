@@ -1,6 +1,6 @@
 # css-documenation-generator
 
-[![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa] ![Version](https://img.shields.io/github/package-json/v/thekeineahnung/css-documenation-generator/main?style=flat-square&label=Version) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa] ![Version](https://img.shields.io/github/package-json/v/thekeineahnung/css-documenation-generator/main?style=flat-square&label=Version) ![build status](https://img.shields.io/github/workflow/status/thekeineahnung/css-documenation-generator/Test%20build?label=Build&style=flat-square) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 css-documenation-generator is a tool that automatically generates documentation for CSS files based on the code in the css file. It is written in TypeScript. Please take a look to the [licence](https://github.com/TheKeineAhnung/resi-script-manager/blob/main/LICENCE.md) before using it.
 
