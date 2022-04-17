@@ -6,13 +6,16 @@ import { isValidGeneratorInput } from './isValidGeneratorInput';
 import { isValidGeneratorOutput } from './isValidGeneratorOutput';
 import { writeFile } from './writeFile';
 
-function generateCssDocs(input: string[], output: string): StatusObject {
+function generateCssDocs(
+  inputPaths: string[],
+  outputPath: string
+): StatusObject {
   let returnObject: StatusObject = {
     status: "success",
   };
 
-  let validInput: StatusObject = isValidGeneratorInput(input);
-  let validOutput: StatusObject = isValidGeneratorOutput(output);
+  let validInput: StatusObject = isValidGeneratorInput(inputPaths);
+  let validOutput: StatusObject = isValidGeneratorOutput(outputPath);
 
   if (validInput.status !== "success") {
     return validInput;
@@ -24,8 +27,8 @@ function generateCssDocs(input: string[], output: string): StatusObject {
 
   let inputFiles: string[] = [];
 
-  for (let i: number = 0; i < input.length; i++) {
-    let files: string[] = getAllCssFilesInFolder(input[i], true);
+  for (let i: number = 0; i < inputPaths.length; i++) {
+    let files: string[] = getAllCssFilesInFolder(inputPaths[i], true);
     files.forEach((file: string) => {
       inputFiles.push(file);
     });
@@ -33,8 +36,8 @@ function generateCssDocs(input: string[], output: string): StatusObject {
 
   let inputFilesWithoutPath: string[] = [];
 
-  for (let i: number = 0; i < input.length; i++) {
-    let files: string[] = getAllCssFilesInFolder(input[i], false);
+  for (let i: number = 0; i < inputPaths.length; i++) {
+    let files: string[] = getAllCssFilesInFolder(inputPaths[i], false);
     files.forEach((file: string) => {
       inputFilesWithoutPath.push(file);
     });
@@ -51,7 +54,7 @@ function generateCssDocs(input: string[], output: string): StatusObject {
   fileContents.forEach((fileContent: string, index: number) => {
     markdown = generateMarkdown(fileContent);
     let outputFile: string =
-      output + "/" + inputFilesWithoutPath[index].replace(".css", ".md");
+      outputPath + "/" + inputFilesWithoutPath[index].replace(".css", ".md");
     let write = writeFile(outputFile, markdown);
     if (write.status !== "success") {
       returnObject.status = "error";
