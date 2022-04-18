@@ -1,7 +1,7 @@
 import { getSelectorComparer } from './getSelectorComparer';
 import { getSelectorType } from './getSelectorType';
 
-const detectSelectorTypeComparer = function (selector: string): string {
+const detectSelectorTypeComparer = function (selector: string): string | false {
   const selectorComparer: string[] = getSelectorComparer();
 
   for (const element of selectorComparer) {
@@ -15,7 +15,7 @@ const detectSelectorTypeComparer = function (selector: string): string {
     }
   }
 
-  return 'false';
+  return false;
 };
 
 export { detectSelectorTypeComparer };

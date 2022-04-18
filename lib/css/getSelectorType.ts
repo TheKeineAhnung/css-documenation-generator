@@ -2,8 +2,12 @@ import { detectSelectorTypeComparer } from './detectSelectorTypeComparer';
 import { isPseudoElement } from './isPseudoElement';
 
 const getSelectorType = function getSelectorType(selector: string): string {
-  if (detectSelectorTypeComparer(selector) !== 'false') {
-    return detectSelectorTypeComparer(selector);
+  if (detectSelectorTypeComparer(selector) !== false) {
+    const detector: string | false = detectSelectorTypeComparer(selector);
+
+    if (detector !== false) {
+      return detector;
+    }
   }
   if (selector.startsWith(':')) {
     if (isPseudoElement(selector)) {
