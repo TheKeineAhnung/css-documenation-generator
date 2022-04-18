@@ -71,7 +71,7 @@ const splitSelectors = function splitSelectors(selectors: string): string[] {
       selectorsAll.splice(index, 1);
     }
   });
-  const mergedSelectors: string[] = [];
+  let mergedSelectors: string[] = [];
   const finalMergedSelectors: string[] = [];
 
   skipNext = false;
@@ -105,6 +105,31 @@ const splitSelectors = function splitSelectors(selectors: string): string[] {
       mergedSelectors.splice(index, 1);
     }
   });
+
+  mergedSelectors.forEach((selector: string, index: number): void => {
+    if (
+      selector.endsWith('>') ||
+      selector.endsWith('+') ||
+      selector.endsWith('~')
+    ) {
+      mergedSelectors[index] += mergedSelectors[index + 1];
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+      delete mergedSelectors[index + 1];
+    }
+  });
+
+  const continueMerging: string[] = [];
+
+  // Is required because array can contain deleted elements cause dynamic delete
+  for (const elem of mergedSelectors) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    if (elem !== undefined) {
+      continueMerging.push(elem);
+    }
+  }
+
+  mergedSelectors = continueMerging;
+
   for (const element of mergedSelectors) {
     const splitedElement: string[] = element.split(' ');
 
