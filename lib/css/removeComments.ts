@@ -1,19 +1,25 @@
-function removeComments(content: string): string {
-  content = content.trim();
+const removeComments = function removeComments(content: string): string {
+  let contentWork: string = content.trim();
 
-  while (content.includes("/*")) {
-    let searchContentStart: RegExp = /(\/\*)/;
-    let searchContentEnd: RegExp = /(\*\/)/;
-    let startSubstringPosition: number = content.search(searchContentStart);
-    let startContent: string = content.substring(startSubstringPosition);
-    let endSubstringPosition: number =
+  while (contentWork.includes('/*')) {
+    const searchContentStart = /(\/\*)/u;
+    const searchContentEnd = /(\*\/)/u;
+    const startSubstringPosition: number =
+      contentWork.search(searchContentStart);
+    const startContent: string = contentWork.slice(
+      Math.max(0, startSubstringPosition)
+    );
+    const endSubstringPosition: number =
       startContent.search(searchContentEnd) + startSubstringPosition;
-    let commentContent: string =
-      content.substring(startSubstringPosition, endSubstringPosition) + "*/";
-    content = content.replace(commentContent, "");
+    const commentContent = `${contentWork.slice(
+      startSubstringPosition,
+      endSubstringPosition
+    )}*/`;
+
+    contentWork = contentWork.replace(commentContent, '');
   }
 
-  return content;
-}
+  return contentWork;
+};
 
 export { removeComments };

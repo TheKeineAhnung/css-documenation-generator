@@ -2,18 +2,21 @@ import { existsSync } from 'fs';
 
 import { StatusObject } from '../types/StatusObject';
 
-function isValidGeneratorOutput(output: string): StatusObject {
-  let returnObject: StatusObject = {
-    status: "success",
+const isValidGeneratorOutput = function isValidGeneratorOutput (
+  output: string
+): StatusObject {
+  const returnObject: StatusObject = {
+    status: 'success'
   };
 
   if (!existsSync(output)) {
-    returnObject.status = "error";
+    returnObject.status = 'error';
     returnObject.message = `'${output}' does not exist`;
+
     return returnObject;
   }
 
   return returnObject;
-}
+};
 
 export { isValidGeneratorOutput };

@@ -1,69 +1,77 @@
-import { getAllCssFilesInFolder } from '../css/getAllCssFilesInFolder';
-import { getCSSContent } from '../css/getCssContent';
-import { StatusObject } from '../types/StatusObject';
 import { generateMarkdown } from './content/generateMarkdown';
+import { getAllCssFilesInFolder } from '../css/getAllCssFilesInFolder';
+import { getCssContent } from '../css/getCssContent';
 import { isValidGeneratorInput } from './isValidGeneratorInput';
 import { isValidGeneratorOutput } from './isValidGeneratorOutput';
+import { StatusObject } from '../types/StatusObject';
 import { writeFile } from './writeFile';
 
-function generateCssDocs(
+const generateCssDocs = function generateCssDocs(
   inputPaths: string[],
   outputPath: string
 ): StatusObject {
-  let returnObject: StatusObject = {
-    status: "success",
+  const returnObject: StatusObject = {
+    status: 'success'
   };
 
-  let validInput: StatusObject = isValidGeneratorInput(inputPaths);
-  let validOutput: StatusObject = isValidGeneratorOutput(outputPath);
+  const validInput: StatusObject = isValidGeneratorInput(inputPaths);
+  const validOutput: StatusObject = isValidGeneratorOutput(outputPath);
 
-  if (validInput.status !== "success") {
+  if (validInput.status !== 'success') {
     return validInput;
   }
 
-  if (validOutput.status !== "success") {
+  if (validOutput.status !== 'success') {
     return validOutput;
   }
 
-  let inputFiles: string[] = [];
+  const inputFiles: string[] = [];
 
-  for (let i: number = 0; i < inputPaths.length; i++) {
-    let files: string[] = getAllCssFilesInFolder(inputPaths[i], true);
-    files.forEach((file: string) => {
+  for (const inputPath of inputPaths) {
+    const files: string[] = getAllCssFilesInFolder(inputPath, true);
+
+    files.forEach((file: string): void => {
       inputFiles.push(file);
     });
   }
 
-  let inputFilesWithoutPath: string[] = [];
+  const inputFilesWithoutPath: string[] = [];
 
-  for (let i: number = 0; i < inputPaths.length; i++) {
-    let files: string[] = getAllCssFilesInFolder(inputPaths[i], false);
-    files.forEach((file: string) => {
+  for (const inputPath of inputPaths) {
+    const files: string[] = getAllCssFilesInFolder(inputPath, false);
+
+    files.forEach((file: string): void => {
       inputFilesWithoutPath.push(file);
     });
   }
 
-  let fileContents: string[] = [];
+  const fileContents: string[] = [];
 
-  for (let i: number = 0; i < inputFiles.length; i++) {
-    fileContents.push(getCSSContent(inputFiles[i]));
+  for (const inputFile of inputFiles) {
+    fileContents.push(getCssContent(inputFile));
   }
 
-  let markdown: string = "";
+  let markdown = '';
 
-  fileContents.forEach((fileContent: string, index: number) => {
-    markdown = generateMarkdown(fileContent);
-    let outputFile: string =
-      outputPath + "/" + inputFilesWithoutPath[index].replace(".css", ".md");
-    let write = writeFile(outputFile, markdown);
-    if (write.status !== "success") {
-      returnObject.status = "error";
-      returnObject.message = write.message;
-      return returnObject;
+  fileContents.forEach(
+    (fileContent: string, index: number): StatusObject | void => {
+      markdown = generateMarkdown(fileContent);
+      const outputFile = `${outputPath}/${inputFilesWithoutPath[index].replace(
+        '.css',
+        '.md'
+      )}`;
+      const write = writeFile(outputFile, markdown);
+
+      if (write.status !== 'success') {
+        returnObject.status = 'error';
+        returnObject.message = write.message;
+
+        return returnObject;
+      }
     }
-  });
+  );
 
   return returnObject;
-}
+};
 
 export { generateCssDocs };

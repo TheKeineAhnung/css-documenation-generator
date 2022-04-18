@@ -1,28 +1,30 @@
 import { generateAnimationMarkdownContent } from './generateAnimationMarkdownContent';
 
-function generateMarkdownContent(
+const generateMarkdownContent = function generateMarkdownContent(
   type: string,
   selector: string,
   content: string
 ): string {
-  let tokens: string[] = content.split(";");
-  tokens.forEach((token: string, index: number) => {
+  const tokens: string[] = content.split(';');
+
+  tokens.forEach((token: string, index: number): void => {
     tokens[index] = token.trim();
   });
-  tokens.forEach((token: string, index: number) => {
-    if (token === "" || token === " " || token === "\r\n" || token === "\n") {
+  tokens.forEach((token: string, index: number): void => {
+    if (token === '' || token === ' ' || token === '\r\n' || token === '\n') {
       tokens.splice(index, 1);
     }
   });
-  if (type.toLowerCase().trim().startsWith("animation")) {
+  if (type.toLowerCase().trim().startsWith('animation')) {
     return generateAnimationMarkdownContent(type, selector, tokens);
-  } else {
-    let contentString: string = "";
-    tokens.forEach((token: string) => {
-      contentString += `- \`${token.trim()}\`\n`;
-    });
-    return `The \`${type.toLowerCase()}\` selector with the specified selectors \`${selector.trim()}\` has the following properties: \n\n${contentString}\n`;
   }
-}
+  let contentString = '';
+
+  tokens.forEach((token: string): void => {
+    contentString += `- \`${token.trim()}\`\n`;
+  });
+
+  return `The \`${type.toLowerCase()}\` selector with the specified selectors \`${selector.trim()}\` has the following properties: \n\n${contentString}\n`;
+};
 
 export { generateMarkdownContent };

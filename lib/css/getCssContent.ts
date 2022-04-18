@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 
-function getCSSContent(cssFilePath: string): string {
-  return readFileSync(cssFilePath, "utf8");
-}
+const getCssContent = function (cssFilePath: string): string {
+  return readFileSync(cssFilePath, 'utf8');
+};
 
-export { getCSSContent };
+export { getCssContent };
