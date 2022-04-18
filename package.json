@@ -9,7 +9,7 @@
     }
   ],
   "author": "TheKeineAhnung",
-  "license": "MIT",
+  "license": "CC-BY-3.0",
   "module": "build/cssDocumentationGenerator.js",
   "types": "build/cssDocumentationGenerator.d.ts",
   "dependencies": {
