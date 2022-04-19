@@ -1,4 +1,4 @@
-const generateMarkdownHeading = function generateMarkdownHeading (
+const generateMarkdownHeading = function generateMarkdownHeading(
   type: string,
   selector: string
 ): string {

@@ -1,4 +1,4 @@
-const getPseudoElements = function getPseudoElements (): string[] {
+const getPseudoElements = function getPseudoElements(): string[] {
   const pseudoElements: string[] = [
     'after',
     'before',

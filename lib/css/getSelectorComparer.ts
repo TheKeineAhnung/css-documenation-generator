@@ -1,5 +1,5 @@
-const getSelectorComparer = function getSelectorComparer (): string[] {
-  const selectorComparer: string[] = [ '>', '~', '+' ];
+const getSelectorComparer = function getSelectorComparer(): string[] {
+  const selectorComparer: string[] = ['>', '~', '+'];
 
   return selectorComparer;
 };
