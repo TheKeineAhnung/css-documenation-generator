@@ -3,3 +3,4 @@ test_files/
 app/
 lib/
 build/app/
+build/test/
