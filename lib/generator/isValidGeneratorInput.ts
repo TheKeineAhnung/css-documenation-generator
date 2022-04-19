@@ -2,7 +2,7 @@ import { existsSync } from 'fs';
 
 import { StatusObject } from '../types/StatusObject';
 
-const isValidGeneratorInput = function isValidGeneratorInput (
+const isValidGeneratorInput = function isValidGeneratorInput(
   input: string[]
 ): StatusObject {
   const returnObject: StatusObject = {
