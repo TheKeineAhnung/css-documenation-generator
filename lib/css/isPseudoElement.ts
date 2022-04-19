@@ -1,11 +1,16 @@
 import { getPseudoElements } from './getPseudoElements';
 
-function isPseudoElement(pseudoElement: string): boolean {
-  let pseudoElements: string[] = getPseudoElements();
-  while (pseudoElement.includes(":")) {
-    pseudoElement = pseudoElement.replace(":", "");
+const isPseudoElement = function isPseudoElement(
+  pseudoElement: string
+): boolean {
+  const pseudoElements: string[] = getPseudoElements();
+  let pseudoElementReplace: string = pseudoElement;
+
+  while (pseudoElementReplace.includes(':')) {
+    pseudoElementReplace = pseudoElementReplace.replace(':', '');
   }
-  return pseudoElements.includes(pseudoElement);
-}
+
+  return pseudoElements.includes(pseudoElementReplace);
+};
 
 export { isPseudoElement };

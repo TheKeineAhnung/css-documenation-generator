@@ -1,39 +1,50 @@
 import { detectSelectorTypeComparer } from './detectSelectorTypeComparer';
 import { isPseudoElement } from './isPseudoElement';
 
-function getSelectorType(selector: string): string {
-  if (detectSelectorTypeComparer(selector) !== "false") {
-    return detectSelectorTypeComparer(selector);
+const getSelectorType = function getSelectorType(selector: string): string {
+  if (detectSelectorTypeComparer(selector) !== false) {
+    const detector: string | false = detectSelectorTypeComparer(selector);
+
+    if (detector !== false) {
+      return detector;
+    }
   }
-  if (selector.startsWith(":")) {
+  if (selector.startsWith(':')) {
     if (isPseudoElement(selector)) {
-      return "::pseudo-element";
-    } else {
-      return ":pseudo-class";
+      return '::pseudo-element';
     }
-  } else if (selector.startsWith("#")) {
-    return "#Id";
-  } else if (selector.startsWith(" #")) {
-    return " #Id";
-  } else if (selector.startsWith(".")) {
-    return ".Class";
-  } else if (selector.startsWith(" .")) {
-    return " .Class";
-  } else if (selector === "*") {
-    return "*Universal";
-  } else if (selector.startsWith("[")) {
-    return "[Attribute]";
-  } else if (selector.startsWith(" [")) {
-    return " [Attribute]";
-  } else if (selector.startsWith("@")) {
-    return "Animation ";
-  } else {
-    if (selector.startsWith(" ")) {
-      return " Element";
-    } else {
-      return "Element";
-    }
+
+    return ':pseudo-class';
   }
-}
+  if (selector.startsWith('#')) {
+    return '#Id';
+  }
+  if (selector.startsWith(' #')) {
+    return ' #Id';
+  }
+  if (selector.startsWith('.')) {
+    return '.Class';
+  }
+  if (selector.startsWith(' .')) {
+    return ' .Class';
+  }
+  if (selector === '*') {
+    return '*Universal';
+  }
+  if (selector.startsWith('[')) {
+    return '[Attribute]';
+  }
+  if (selector.startsWith(' [')) {
+    return ' [Attribute]';
+  }
+  if (selector.startsWith('@')) {
+    return 'Animation ';
+  }
+  if (selector.startsWith(' ')) {
+    return ' Element';
+  }
+
+  return 'Element';
+};
 
 export { getSelectorType };

@@ -1,24 +1,27 @@
+import { StatusObject } from '../types/StatusObject';
 import { writeFileSync } from 'fs';
 
-import { StatusObject } from '../types/StatusObject';
-
-function writeFile(filePath: string, content: string): StatusObject {
-  let returnObject: StatusObject = {
-    status: "success",
+const writeFile = function writeFile(
+  filePath: string,
+  content: string
+): StatusObject {
+  const returnObject: StatusObject = {
+    status: 'success'
   };
+
   try {
     writeFileSync(filePath, content);
-  } catch (error: unknown) {
-    returnObject.status = "error";
-    if (typeof error === "string") {
-      returnObject.message = error;
+  } catch (ex: unknown) {
+    returnObject.status = 'error';
+    if (typeof ex === 'string') {
+      returnObject.message = ex;
     } else {
       returnObject.message =
-        "An unknown error occurred while writing the markdown file(s).";
+        'An unknown error occurred while writing the markdown file(s).';
     }
-  } finally {
-    return returnObject;
   }
-}
+
+  return returnObject;
+};
 
 export { writeFile };

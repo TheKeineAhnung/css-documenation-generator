@@ -1,0 +1,22 @@
+{
+  "extends": "es/node",
+  "rules": {
+    "@typescript-eslint/space-before-function-paren": 0,
+    "@typescript-eslint/prefer-for-of": 0,
+    "array-bracket-spacing": 0,
+    "dot-location": "off",
+    "prefer-named-capture-group": 0,
+    "space-before-function-paren": 0,
+    "unicorn/import-style": [
+      "error",
+      {
+        "styles": {
+          "util": false,
+          "path": {
+            "named": true
+          }
+        }
+      }
+    ]
+  }
+}

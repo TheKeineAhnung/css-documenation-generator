@@ -1,6 +1,7 @@
-function getSelectorComparer(): string[] {
-  let selectorComparer: string[] = [">", "~", "+"];
+const getSelectorComparer = function getSelectorComparer (): string[] {
+  const selectorComparer: string[] = [ '>', '~', '+' ];
+
   return selectorComparer;
-}
+};
 
 export { getSelectorComparer };

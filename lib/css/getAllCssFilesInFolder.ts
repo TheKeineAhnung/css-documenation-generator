@@ -1,17 +1,19 @@
 import { readdirSync } from 'fs';
 
-function getAllCssFilesInFolder(
+const getAllCssFilesInFolder = function (
   input: string,
-  fullPath: boolean = false
+  fullPath = false
 ): string[] {
   let files: string[] = readdirSync(input);
-  files = files.filter((file) => file.endsWith(".css"));
+
+  files = files.filter((file: string): boolean => file.endsWith('.css'));
   if (fullPath) {
-    files.forEach((file: string) => {
+    files.forEach((file: string): void => {
       files[files.indexOf(file)] = `${input}/${file}`;
     });
   }
+
   return files;
-}
+};
 
 export { getAllCssFilesInFolder };
