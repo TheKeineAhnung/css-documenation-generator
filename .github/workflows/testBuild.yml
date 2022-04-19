@@ -25,5 +25,5 @@ jobs:
         run: npm install
       - name: npm fund
         run: npm fund
-      - name: Test with roboter
-        run: npx roboter
+      - name: Build
+        run: npm run build
