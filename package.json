@@ -1,6 +1,6 @@
 {
   "name": "css-documenation-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Css-documenation-generator is a tool that automatically generates documentation for CSS files based on the code in the css file.",
   "contributors": [
     {
