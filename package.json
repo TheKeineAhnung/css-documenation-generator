@@ -10,8 +10,8 @@
   ],
   "author": "TheKeineAhnung",
   "private": false,
-  "main": "build/cssDocumentationGenerator.js",
-  "types": "build/cssDocumentationGenerator.d.ts",
+  "main": "build/lib/cssDocumentationGenerator.js",
+  "types": "build/lib/cssDocumentationGenerator.d.ts",
   "dependencies": {
     "@types/node": "17.0.25"
   },
